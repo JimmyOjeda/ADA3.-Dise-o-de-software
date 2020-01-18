@@ -16,7 +16,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        String saludo = String();
+        Object numero = new Object();
     }
     
 }
