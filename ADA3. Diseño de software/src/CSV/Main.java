@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -51,8 +52,36 @@ public class Main {
         
         ArrayList<ArrayList<String>> dataOutput = new ArrayList<ArrayList<String>>();
         TablaDeDatos tableOutput = new TablaDeDatos(dataOutput);
+        
+        for(int i = 1; i< datosAlumnos.getMatriz().size(); i++){
+            ArrayList alumno = new ArrayList();
+            alumno.add(datosAlumnos.getMatriz().get(i).get(0)+"");
+            alumno.add("Diseño de software");
+            alumno.add(datosAlumnos.getMatriz().get(i).get(4)+"");
+            tableOutput.getMatriz().add(alumno);
+        }
+        
         String output = tableOutput.matrizToCSV();
         
+        FileWriter file = null;
+        PrintWriter pw = null;
+        try
+        {
+            file = new FileWriter("C:\\Users\\jimmy\\Desktop\\FileOutput.csv");
+            pw = new PrintWriter(file);
+            pw.write(output);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           try {
+           // Nuevamente aprovechamos el finally para 
+           // asegurarnos que se cierra el fichero.
+           if (null != file)
+              file.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
     }
     
 }

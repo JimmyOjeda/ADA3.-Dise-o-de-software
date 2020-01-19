@@ -35,11 +35,10 @@ public class TablaDeDatos {
         for(int i=0;i<this.matriz.size();i++){
             ArrayList iArray = this.matriz.get(i);
             for (int j=0;j<iArray.size();j++){
-                output.concat(output+iArray.get(j)+",");
+                output = output+iArray.get(j)+",";
             }
             output = output.substring(0, output.length()-1);
-            System.out.println(output);
-            output.concat("\n");
+            output = output + "\n";
         }
         return output;
     }
