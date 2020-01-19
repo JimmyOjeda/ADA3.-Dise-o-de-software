@@ -46,10 +46,12 @@ public class Main {
         datosAlumnos.agregarDato(0, "CALIFICACION");
         for (int i=1;i<datosAlumnos.getMatriz().size();i++){
             System.out.println("Ingresa la calificacion para " + datosAlumnos.getMatriz().get(i).get(3));
-            datosAlumnos.agregarDato(i, entradaStr.nextLine());
+            datosAlumnos.agregarDato(i, "100"/*entradaStr.nextLine()*/);
         }
         
         ArrayList<ArrayList<String>> dataOutput = new ArrayList<ArrayList<String>>();
+        TablaDeDatos tableOutput = new TablaDeDatos(dataOutput);
+        String output = tableOutput.matrizToCSV();
         
     }
     

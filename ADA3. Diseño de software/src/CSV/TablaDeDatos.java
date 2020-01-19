@@ -13,6 +13,10 @@ import java.util.ArrayList;
  */
 public class TablaDeDatos {
     private ArrayList<ArrayList<String>> matriz;
+    
+    public TablaDeDatos(ArrayList<ArrayList<String>> matriz) {
+        this.matriz = matriz;
+    }
 
     public ArrayList<ArrayList<String>> getMatriz() {
         return matriz;
@@ -21,13 +25,23 @@ public class TablaDeDatos {
     public void setMatriz(ArrayList<ArrayList<String>> matriz) {
         this.matriz = matriz;
     }
-
-    public TablaDeDatos(ArrayList<ArrayList<String>> matriz) {
-        this.matriz = matriz;
-    }
     
     public void agregarDato(int numeroAlumno, String dato){
         this.matriz.get(numeroAlumno).add(dato);
+    }
+    
+    public String matrizToCSV(){
+        String output = "";
+        for(int i=0;i<this.matriz.size();i++){
+            ArrayList iArray = this.matriz.get(i);
+            for (int j=0;j<iArray.size();j++){
+                output.concat(output+iArray.get(j)+",");
+            }
+            output = output.substring(0, output.length()-1);
+            System.out.println(output);
+            output.concat("\n");
+        }
+        return output;
     }
 
     @Override
