@@ -48,7 +48,6 @@ public class Main {
             datosAlumnos.agregarDato(i, "100");
         }
         System.out.println(datosAlumnos.toString());
-        
     }
     
 }
