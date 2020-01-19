@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Scanner entradaStr = new Scanner(System.in);
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
         
         try{
@@ -40,12 +42,10 @@ public class Main {
         }
         
         TablaDeDatos datosAlumnos = new TablaDeDatos(data);
+        datosAlumnos.agregarDato(0, "CALIFICACION");
         for (int i=1;i<datosAlumnos.getMatriz().size();i++){
-            datosAlumnos.agregarDato(i, "100");
-            datosAlumnos.agregarDato(i, "100");
-            datosAlumnos.agregarDato(i, "100");
-            datosAlumnos.agregarDato(i, "100");
-            datosAlumnos.agregarDato(i, "100");
+            System.out.println("Ingresa la calificacion para " + datosAlumnos.getMatriz().get(i).get(3));
+            datosAlumnos.agregarDato(i, entradaStr.nextLine());
         }
         System.out.println(datosAlumnos.toString());
     }
