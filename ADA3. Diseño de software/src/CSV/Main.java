@@ -7,6 +7,7 @@ package CSV;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -47,7 +48,9 @@ public class Main {
             System.out.println("Ingresa la calificacion para " + datosAlumnos.getMatriz().get(i).get(3));
             datosAlumnos.agregarDato(i, entradaStr.nextLine());
         }
-        System.out.println(datosAlumnos.toString());
+        
+        ArrayList<ArrayList<String>> dataOutput = new ArrayList<ArrayList<String>>();
+        
     }
     
 }
