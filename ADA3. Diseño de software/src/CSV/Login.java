@@ -8,7 +8,6 @@ package CSV;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import org.apache.commons.codec.binary.Hex;
 
 
 /**
@@ -22,19 +21,10 @@ public class Login {
 
     
     //Constructor
-    public Login(String user, String password, ArrayList<ArrayList<String>> datosUsers) throws NoSuchAlgorithmException {
+    public Login(String user, String password, ArrayList<ArrayList<String>> datosUsers) {
         this.user = user;
         this.password = password;
         this.datosUsers = datosUsers;
-        try{
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
-            md.update(password.getBytes());
-            byte[] mb = md.digest();
-            System.out.println(Hex.encodeHex(mb));
-        }
-        catch(NoSuchAlgorithmException e){
-            System.out.println("Error en el constructor del login");
-        }
     }
 
     //funciones get
