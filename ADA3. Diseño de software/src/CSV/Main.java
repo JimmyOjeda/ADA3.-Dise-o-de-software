@@ -42,7 +42,7 @@ public class Main {
     
     private static void readCSV(ArrayList<ArrayList<String>> data){
         try{
-            BufferedReader br =new BufferedReader(new FileReader("C:\\Users\\jimmy\\Desktop\\ListaAlumnos.csv"));
+            BufferedReader br =new BufferedReader(new FileReader("C:\\Users\\jimmy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\ListaAlumnos.csv"));
             String line = br.readLine();
             while (line != null){
                 String[] dataLine = line.split(",");
