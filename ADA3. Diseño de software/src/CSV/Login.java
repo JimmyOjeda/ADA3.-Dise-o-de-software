@@ -25,6 +25,11 @@ public class Login {
         this.user = user;
         this.password = password;
         this.datosUsers = datosUsers;
+        
+        
+        for (int i=0;i<this.datosUsers.size();i++){
+            this.datosUsers.get(i).add(this.encryptPass(this.datosUsers.get(i).get(1)));
+        }
     }
 
     //funciones get
@@ -54,7 +59,7 @@ public class Login {
     }
     
     //demas funciones
-    public String encriptarPass(String password){   //función para encriptar en MD5 la contraseña
+    public String encryptPass(String password){   //función para encriptar en MD5 la contraseña
         String passwordToHash = password;
         String generatedPassword = null;
         try {
@@ -83,7 +88,16 @@ public class Login {
     }
     
     public boolean comparePass(){
-        return true;
+        boolean equal=false;
+        for (int i=0;i<getDatosUsers().size();i++){
+            if(getUser().equals(getDatosUsers().get(i).get(0))){
+                if(encryptPass(getPassword()).equals(getDatosUsers().get(i).get(2))){
+                    equal = true;
+                    break;
+                }
+            }
+        }
+        return equal;
     }
     
 }

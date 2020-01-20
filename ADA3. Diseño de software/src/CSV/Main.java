@@ -24,28 +24,15 @@ public class Main {
      */
     public static void main(String[] args) {
         Scanner entradaStr = new Scanner(System.in);
-        ArrayList<ArrayList<String>> datosUsers = new ArrayList<ArrayList<String>>();
-        Login login = new Login(entradaStr.nextLine(),entradaStr.nextLine(),datosUsers);
         
-        System.out.println("Contraseña encriptada: " + login.encriptarPass(login.getPassword()));   //Prueba Daniel para encriptar contraseña (solo esta linea se movió)
-        
-        
-        while (login.comparePass()==false){
-            System.out.println("Usuario o contraseña incorrecta, intenta de nuevo:");
-            System.out.println("Usuario:");
-            //login.setUser(entradaStr.nextLine());
-            System.out.println("Contraseña:");
-            //login.setPassword(entradaStr.nextLine());
-        }
-        System.out.println("\n\nBienvenido"/*+login.getUser*/);
-        
+        login();
         
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
         TablaDeDatos datosAlumnos = new TablaDeDatos(data);
         ArrayList<ArrayList<String>> dataOutput = new ArrayList<ArrayList<String>>();
         TablaDeDatos tableOutput = new TablaDeDatos(dataOutput);
         
-        readCSV(data);
+        readCSV(data,"C:\\Users\\jimmy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\ListaAlumnos.csv");
         
         writeGrade(datosAlumnos);
         
@@ -55,9 +42,32 @@ public class Main {
         
     }
     
-    private static void readCSV(ArrayList<ArrayList<String>> data){
+    private static void login(){
+        Scanner entradaStr = new Scanner(System.in);
+        ArrayList<ArrayList<String>> datosUsers = new ArrayList<ArrayList<String>>();
+        readCSV(datosUsers,"C:\\Users\\jimmy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\usuarios.csv");
+        
+        System.out.println("Ingresa tu usuario");
+        String firstUser="";
+        firstUser=entradaStr.nextLine();
+        System.out.println("Ingresa la contraseña");
+        String firstPassword="";
+        firstPassword=entradaStr.nextLine();
+        Login login = new Login(firstUser,firstPassword,datosUsers);
+        
+        while (login.comparePass()==false){
+            System.out.println("\n\nUsuario o contraseña incorrecta, intenta de nuevo:");
+            System.out.println("Usuario:");
+            login.setUser(entradaStr.nextLine());
+            System.out.println("Contraseña:");
+            login.setPassword(entradaStr.nextLine());
+        }
+        System.out.println("\n\nBienvenido "+login.getUser());
+    }
+    
+    private static void readCSV(ArrayList<ArrayList<String>> data, String route){
         try{
-            BufferedReader br =new BufferedReader(new FileReader("C:\\Users\\jimmy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\ListaAlumnos.csv"));
+            BufferedReader br =new BufferedReader(new FileReader(route));
             String line = br.readLine();
             while (line != null){
                 String[] dataLine = line.split(",");
