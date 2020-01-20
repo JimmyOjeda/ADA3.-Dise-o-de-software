@@ -26,7 +26,21 @@ public class Main {
         // TODO code application logic here
         Scanner entradaStr = new Scanner(System.in);
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+        TablaDeDatos datosAlumnos = new TablaDeDatos(data);
+        ArrayList<ArrayList<String>> dataOutput = new ArrayList<ArrayList<String>>();
+        TablaDeDatos tableOutput = new TablaDeDatos(dataOutput);
         
+        readCSV(data);
+        
+        writeGrade(datosAlumnos);
+        
+        setTable(datosAlumnos,tableOutput);
+        
+        writeCSV(tableOutput);
+        
+    }
+    
+    private static void readCSV(ArrayList<ArrayList<String>> data){
         try{
             BufferedReader br =new BufferedReader(new FileReader("C:\\Users\\jimmy\\Desktop\\ListaAlumnos.csv"));
             String line = br.readLine();
@@ -42,27 +56,28 @@ public class Main {
         }catch(IOException e){
             e.printStackTrace();
         }
-        
-        TablaDeDatos datosAlumnos = new TablaDeDatos(data);
+    }
+    
+    private static void writeGrade(TablaDeDatos datosAlumnos){
         datosAlumnos.agregarDato(0, "CALIFICACION");
         for (int i=1;i<datosAlumnos.getMatriz().size();i++){
             System.out.println("Ingresa la calificacion para " + datosAlumnos.getMatriz().get(i).get(3));
-            datosAlumnos.agregarDato(i, "100"/*entradaStr.nextLine()*/);
+            datosAlumnos.agregarDato(i,"50"/*entradaStr.nextLine()*/);
         }
-        
-        ArrayList<ArrayList<String>> dataOutput = new ArrayList<ArrayList<String>>();
-        TablaDeDatos tableOutput = new TablaDeDatos(dataOutput);
-        
+    }
+    
+    private static void setTable(TablaDeDatos datosAlumnos,TablaDeDatos tableOutput){
         for(int i = 1; i< datosAlumnos.getMatriz().size(); i++){
             ArrayList alumno = new ArrayList();
             alumno.add(datosAlumnos.getMatriz().get(i).get(0)+"");
             alumno.add("Diseño de software");
-            alumno.add(datosAlumnos.getMatriz().get(i).get(4)+"");
+            alumno.add(datosAlumnos.getMatriz().get(i).get(5)+"");
             tableOutput.getMatriz().add(alumno);
         }
-        
+    }
+    
+    private static void writeCSV(TablaDeDatos tableOutput){
         String output = tableOutput.matrizToCSV();
-        
         FileWriter file = null;
         PrintWriter pw = null;
         try
