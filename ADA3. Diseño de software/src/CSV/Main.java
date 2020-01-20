@@ -23,8 +23,20 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         Scanner entradaStr = new Scanner(System.in);
+        ArrayList<ArrayList<String>> datosUsers = new ArrayList<ArrayList<String>>();
+        Login login = new Login(entradaStr.nextLine(),entradaStr.nextLine(),datosUsers);
+        
+        while (login.comparePass()==false){
+            System.out.println("Usuario o contraseña incorrecta, intenta de nuevo:");
+            System.out.println("Usuario:");
+            //login.setUser(entradaStr.nextLine());
+            System.out.println("Contraseña:");
+            //login.setPassword(entradaStr.nextLine());
+        }
+        System.out.println("\n\nBienvenido"/*+login.getUser*/);
+        
+        
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
         TablaDeDatos datosAlumnos = new TablaDeDatos(data);
         ArrayList<ArrayList<String>> dataOutput = new ArrayList<ArrayList<String>>();
