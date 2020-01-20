@@ -23,23 +23,12 @@ public class Login {
         this.user = user;
         this.password = password;
         this.datosUsers = datosUsers;
+        
     }
     
-    private static void readCSV(ArrayList<ArrayList<String>> data){
-        try{
-            BufferedReader br =new BufferedReader(new FileReader("C:\\Users\\jimmy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\ListaAlumnos.csv"));
-            String line = br.readLine();
-            while (line != null){
-                String[] dataLine = line.split(",");
-                ArrayList<String> tempData = new ArrayList<String>();
-                for (String dato : dataLine){
-                    tempData.add(dato);
-                }
-                data.add(tempData);
-                line = br.readLine();
-            }
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+    public boolean comparePass(){
+        return true;
     }
+    
+    
 }
