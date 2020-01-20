@@ -27,6 +27,9 @@ public class Main {
         ArrayList<ArrayList<String>> datosUsers = new ArrayList<ArrayList<String>>();
         Login login = new Login(entradaStr.nextLine(),entradaStr.nextLine(),datosUsers);
         
+        System.out.println("Contraseña encriptada: " + login.encriptarPass(login.getPassword()));   //Prueba Daniel para encriptar contraseña (solo esta linea se movió)
+        
+        
         while (login.comparePass()==false){
             System.out.println("Usuario o contraseña incorrecta, intenta de nuevo:");
             System.out.println("Usuario:");
