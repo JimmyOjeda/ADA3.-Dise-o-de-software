@@ -18,8 +18,8 @@ import java.util.Scanner;
  * @author Jimmy y Daniel
  * 
     //Crear el algoritmo de encritamiento 30min
-    //Crear algoritmo para comparar contraseña encriptada 40min
-    //Adaptarlo al main 20min
+    //Crear algoritmo para comparar contraseña encriptada y adaptar al main 40min
+    //Modularizar el main 20min
  */
 public class Main {
 
@@ -28,13 +28,12 @@ public class Main {
      */
     public static void main(String[] args) {
         Scanner entradaStr = new Scanner(System.in);
-        
-        login();
-        
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
         TablaDeDatos datosAlumnos = new TablaDeDatos(data);
         ArrayList<ArrayList<String>> dataOutput = new ArrayList<ArrayList<String>>();
         TablaDeDatos tableOutput = new TablaDeDatos(dataOutput);
+        
+        login();
         
         readCSV(data,"C:\\Users\\plupy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\ListaAlumnos.csv");
         
