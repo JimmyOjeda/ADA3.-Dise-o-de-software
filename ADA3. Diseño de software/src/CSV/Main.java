@@ -15,7 +15,11 @@ import java.util.Scanner;
 
 /**
  *
- * @author jimmy
+ * @author Jimmy y Daniel
+ * 
+    //Crear el algoritmo de encritamiento 30min
+    //Crear algoritmo para comparar contraseña encriptada 40min
+    //Adaptarlo al main 20min
  */
 public class Main {
 
@@ -32,7 +36,7 @@ public class Main {
         ArrayList<ArrayList<String>> dataOutput = new ArrayList<ArrayList<String>>();
         TablaDeDatos tableOutput = new TablaDeDatos(dataOutput);
         
-        readCSV(data,"C:\\Users\\jimmy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\ListaAlumnos.csv");
+        readCSV(data,"C:\\Users\\plupy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\ListaAlumnos.csv");
         
         writeGrade(datosAlumnos);
         
@@ -45,7 +49,7 @@ public class Main {
     private static void login(){
         Scanner entradaStr = new Scanner(System.in);
         ArrayList<ArrayList<String>> datosUsers = new ArrayList<ArrayList<String>>();
-        readCSV(datosUsers,"C:\\Users\\jimmy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\usuarios.csv");
+        readCSV(datosUsers,"C:\\Users\\plupy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\usuarios.csv");
         
         System.out.println("Ingresa tu usuario");
         String firstUser="";
@@ -107,7 +111,7 @@ public class Main {
         PrintWriter pw = null;
         try
         {
-            file = new FileWriter("C:\\Users\\jimmy\\Desktop\\FileOutput.csv");
+            file = new FileWriter("C:\\Users\\plupy\\Desktop\\FileOutput.csv");
             pw = new PrintWriter(file);
             pw.write(output);
         } catch (Exception e) {
