@@ -6,8 +6,11 @@
 package CSV;
 
 import com.qoppa.pdfWriter.PDFDocument;
+import com.qoppa.pdfWriter.PDFGraphics;
 import com.qoppa.pdfWriter.PDFPage;
+import java.awt.Color;
 import java.awt.print.PageFormat;
+import java.awt.print.Paper;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -38,18 +41,28 @@ public class Main {
         
         
         PDFDocument doc = new PDFDocument();
-        PageFormat pf = doc.getDefaultPageFormat();
-        doc.addPage(doc.createPage(pf));
-        try{
-            doc.saveDocument("doc.pdf");
-        }catch (Exception e){
-            
-        }
+        // create a PageFormat of standard letter size 
+        // with no margins
+        Paper p = new Paper ();
+        p.setSize(8.5 * 72, 11 * 72);
+        p.setImageableArea(0, 0, 8.5 * 72, 11 * 72);
+        PageFormat pf = new PageFormat ();
+        pf.setPaper(p);
+
+        // create a new page and add it to the PDF (important!)
+        PDFPage page = doc.createPage(pf);
+        doc.addPage(page);
+
+        // get graphics from the page
+        // this object is a Graphics2D Object and you can draw anything 
+        // you would draw on a Graphics2D
+        PDFGraphics g2d = (PDFGraphics) page.createGraphics();
         
         
-        login();
         
-        readCSV(data,"C:\\Users\\plupy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\ListaAlumnos.csv");
+        //login();
+        
+        readCSV(data,"C:\\Users\\jimmy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\ListaAlumnos.csv");
         
         writeGrade(datosAlumnos);
         
@@ -57,12 +70,27 @@ public class Main {
         
         writeCSV(tableOutput);
         
+        
+        // set the font and color
+        g2d.setFont (PDFGraphics.HELVETICA.deriveFont(11));
+        g2d.setColor(Color.BLACK);
+        String output = tableOutput.matrizToCSV();
+        // draw text on the graphics object of the page
+        g2d.drawString(output, 20, 100);
+        // Save the document
+        try{
+            doc.saveDocument ("doc.pdf");
+        }catch (Exception e){
+            
+        }
+        
+        
     }
     
     private static void login(){
         Scanner entradaStr = new Scanner(System.in);
         ArrayList<ArrayList<String>> datosUsers = new ArrayList<ArrayList<String>>();
-        readCSV(datosUsers,"C:\\Users\\plupy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\usuarios.csv");
+        readCSV(datosUsers,"C:\\Users\\jimmy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\usuarios.csv");
         
         System.out.println("Ingresa tu usuario");
         String firstUser="";
@@ -124,7 +152,7 @@ public class Main {
         PrintWriter pw = null;
         try
         {
-            file = new FileWriter("C:\\Users\\plupy\\Desktop\\FileOutput.csv");
+            file = new FileWriter("C:\\Users\\jimmy\\Desktop\\FileOutput.csv");
             pw = new PrintWriter(file);
             pw.write(output);
         } catch (Exception e) {
