@@ -5,6 +5,7 @@
  */
 package CSV;
 
+import com.qoppa.pdfWriter.PDFDocument;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -32,6 +33,9 @@ public class Main {
         TablaDeDatos datosAlumnos = new TablaDeDatos(data);
         ArrayList<ArrayList<String>> dataOutput = new ArrayList<ArrayList<String>>();
         TablaDeDatos tableOutput = new TablaDeDatos(dataOutput);
+        
+        PDFDocument doc = new PDFDocument();
+        
         
         login();
         
