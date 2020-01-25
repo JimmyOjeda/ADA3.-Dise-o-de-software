@@ -6,6 +6,8 @@
 package CSV;
 
 import com.qoppa.pdfWriter.PDFDocument;
+import com.qoppa.pdfWriter.PDFPage;
+import java.awt.print.PageFormat;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -34,7 +36,15 @@ public class Main {
         ArrayList<ArrayList<String>> dataOutput = new ArrayList<ArrayList<String>>();
         TablaDeDatos tableOutput = new TablaDeDatos(dataOutput);
         
+        
         PDFDocument doc = new PDFDocument();
+        PageFormat pf = doc.getDefaultPageFormat();
+        doc.addPage(doc.createPage(pf));
+        try{
+            doc.saveDocument("doc.pdf");
+        }catch (Exception e){
+            
+        }
         
         
         login();
