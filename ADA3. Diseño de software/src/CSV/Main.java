@@ -42,31 +42,9 @@ public class Main {
         ArrayList<ArrayList<String>> dataOutput = new ArrayList<ArrayList<String>>();
         TablaDeDatos tableOutput = new TablaDeDatos(dataOutput);
         
+        login();
         
-        PDFDocument doc = new PDFDocument();
-        // create a PageFormat of standard letter size 
-        // with no margins
-        Paper p = new Paper ();
-        p.setSize(8.5 * 72, 11 * 72);
-        p.setImageableArea(0, 0, 8.5 * 72, 11 * 72);
-        PageFormat pf = new PageFormat ();
-        pf.setPaper(p);
-
-        // create a new page and add it to the PDF (important!)
-        PDFPage page = doc.createPage(pf);
-        doc.addPage(page);
-
-        // get graphics from the page
-        // this object is a Graphics2D Object and you can draw anything 
-        // you would draw on a Graphics2D
-        PDFGraphics g2d = (PDFGraphics) page.createGraphics();
-        PDFGraphics tittle = (PDFGraphics) page.createGraphics();
-        
-        
-        
-        //login();
-        
-        readCSV(data,"C:\\Users\\plupy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\ListaAlumnos.csv");
+        readCSV(data,"ListaAlumnos.csv");
         
         writeGrade(datosAlumnos);
         
@@ -74,40 +52,14 @@ public class Main {
         
         writeCSV(tableOutput);
         
-        
-        
-        
-        try{
-            // set the font and color
-            g2d.setFont(PDFGraphics.HELVETICA.deriveFont(11));
-            g2d.setColor(Color.BLACK);
-            tittle.setFont(PDFGraphics.HELVETICA.deriveFont(50));
-            tittle.setColor(Color.BLUE);
-            
-            String output = tableOutput.matrizToCSV();
-            // draw text on the graphics object of the page
-            tableOutput.userToString(g2d);
-            tittle.drawString("Calificaciones", 250, 50);
-            
-            // read an image (could be png, jpg, etc...)
-            BufferedImage image = ImageIO.read(new File("logoUady.png"));
-
-            // draw the image on the page
-            g2d.drawImage(image, 450, 10, null);
-            // Save the document
-            doc.saveDocument ("doc.pdf");
-            
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        
-        
+        writePDF(tableOutput);
+       
     }
     
     private static void login(){
         Scanner entradaStr = new Scanner(System.in);
         ArrayList<ArrayList<String>> datosUsers = new ArrayList<ArrayList<String>>();
-        readCSV(datosUsers,"C:\\Users\\plupy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\usuarios.csv");
+        readCSV(datosUsers,"usuarios.csv");
         
         System.out.println("Ingresa tu usuario");
         String firstUser="";
@@ -146,10 +98,16 @@ public class Main {
     }
     
     private static void writeGrade(TablaDeDatos datosAlumnos){
+        Scanner entradaStr = new Scanner(System.in);
+        String grade="";
         datosAlumnos.agregarDato(0, "CALIFICACION");
         for (int i=1;i<datosAlumnos.getMatriz().size();i++){
-            System.out.println("Ingresa la calificacion para " + datosAlumnos.getMatriz().get(i).get(3));
-            datosAlumnos.agregarDato(i,"50"/*entradaStr.nextLine()*/);
+            System.out.println("Ingresa la calificacion para " + datosAlumnos.getMatriz().get(i).get(2) +" "+ datosAlumnos.getMatriz().get(i).get(4));
+            grade = entradaStr.nextLine();
+            if (grade.isEmpty() || grade == " "){
+                grade = "S/C";
+            }
+            datosAlumnos.agregarDato(i,/*"50"*/grade);
         }
     }
     
@@ -169,7 +127,7 @@ public class Main {
         PrintWriter pw = null;
         try
         {
-            file = new FileWriter("C:\\Users\\plupy\\Desktop\\FileOutput.csv");
+            file = new FileWriter("FileOutput.csv");
             pw = new PrintWriter(file);
             pw.write(output);
         } catch (Exception e) {
@@ -183,6 +141,49 @@ public class Main {
            } catch (Exception e2) {
               e2.printStackTrace();
            }
+        }
+    }
+    
+    private static void writePDF(TablaDeDatos tableOutput){
+        try{
+            PDFDocument doc = new PDFDocument();
+            // create a PageFormat of standard letter size 
+            // with no margins
+            Paper p = new Paper ();
+            p.setSize(8.5 * 72, 11 * 72);
+            p.setImageableArea(0, 0, 8.5 * 72, 11 * 72);
+            PageFormat pf = new PageFormat ();
+            pf.setPaper(p);
+
+            // create a new page and add it to the PDF (important!)
+            PDFPage page = doc.createPage(pf);
+            doc.addPage(page);
+            
+            // get graphics from the page
+            // this object is a Graphics2D Object and you can draw anything 
+            // you would draw on a Graphics2D
+            PDFGraphics g2d = (PDFGraphics) page.createGraphics();
+            
+            //Setea el color y tamaño
+            g2d.setFont(PDFGraphics.HELVETICA.deriveFont(11));
+            g2d.setColor(Color.BLACK);
+            
+            //Escribe los textos en el pdf
+            String output = tableOutput.matrizToCSV();
+            tableOutput.userToString(g2d);
+            g2d.setColor(Color.BLUE);
+            g2d.drawString("Calificaciones", 250, 50);
+            
+            //Lee la imagen
+            BufferedImage image = ImageIO.read(new File("logoUady.png"));
+
+            //Imprime la imagen en el pdf
+            g2d.drawImage(image, 450, 10, null);
+            //Guarda el archivo
+            doc.saveDocument ("doc.pdf");
+            
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
     

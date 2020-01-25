@@ -53,7 +53,7 @@ public class TablaDeDatos {
             for (int j=0;j<iArray.size();j++){
                 output = output+iArray.get(j)+" | ";
             }
-            g2d.drawString(output, 20, cont);
+            g2d.drawString(output, 40, cont);
             cont = cont+15;
         }
     }
