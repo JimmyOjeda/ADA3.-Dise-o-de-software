@@ -9,15 +9,18 @@ import com.qoppa.pdfWriter.PDFDocument;
 import com.qoppa.pdfWriter.PDFGraphics;
 import com.qoppa.pdfWriter.PDFPage;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Paper;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -57,12 +60,13 @@ public class Main {
         // this object is a Graphics2D Object and you can draw anything 
         // you would draw on a Graphics2D
         PDFGraphics g2d = (PDFGraphics) page.createGraphics();
+        PDFGraphics tittle = (PDFGraphics) page.createGraphics();
         
         
         
         //login();
         
-        readCSV(data,"C:\\Users\\jimmy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\ListaAlumnos.csv");
+        readCSV(data,"C:\\Users\\plupy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\ListaAlumnos.csv");
         
         writeGrade(datosAlumnos);
         
@@ -71,15 +75,28 @@ public class Main {
         writeCSV(tableOutput);
         
         
-        // set the font and color
-        g2d.setFont (PDFGraphics.HELVETICA.deriveFont(11));
-        g2d.setColor(Color.BLACK);
-        String output = tableOutput.matrizToCSV();
-        // draw text on the graphics object of the page
-        tableOutput.userToString(g2d);
-        // Save the document
+        
+        
         try{
+            // set the font and color
+            g2d.setFont(PDFGraphics.HELVETICA.deriveFont(11));
+            g2d.setColor(Color.BLACK);
+            tittle.setFont(PDFGraphics.HELVETICA.deriveFont(50));
+            tittle.setColor(Color.BLUE);
+            
+            String output = tableOutput.matrizToCSV();
+            // draw text on the graphics object of the page
+            tableOutput.userToString(g2d);
+            tittle.drawString("Calificaciones", 250, 50);
+            
+            // read an image (could be png, jpg, etc...)
+            BufferedImage image = ImageIO.read(new File("logoUady.png"));
+
+            // draw the image on the page
+            g2d.drawImage(image, 450, 10, null);
+            // Save the document
             doc.saveDocument ("doc.pdf");
+            
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -90,7 +107,7 @@ public class Main {
     private static void login(){
         Scanner entradaStr = new Scanner(System.in);
         ArrayList<ArrayList<String>> datosUsers = new ArrayList<ArrayList<String>>();
-        readCSV(datosUsers,"C:\\Users\\jimmy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\usuarios.csv");
+        readCSV(datosUsers,"C:\\Users\\plupy\\Documents\\NetBeansProjects\\ADA3.-Dise-o-de-software\\usuarios.csv");
         
         System.out.println("Ingresa tu usuario");
         String firstUser="";
@@ -152,7 +169,7 @@ public class Main {
         PrintWriter pw = null;
         try
         {
-            file = new FileWriter("C:\\Users\\jimmy\\Desktop\\FileOutput.csv");
+            file = new FileWriter("C:\\Users\\plupy\\Desktop\\FileOutput.csv");
             pw = new PrintWriter(file);
             pw.write(output);
         } catch (Exception e) {

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author plupy
+ * @author Jimmy y Daniel
  */
 public class Login {
     private String user;
