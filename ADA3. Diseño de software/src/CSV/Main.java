@@ -76,12 +76,12 @@ public class Main {
         g2d.setColor(Color.BLACK);
         String output = tableOutput.matrizToCSV();
         // draw text on the graphics object of the page
-        g2d.drawString(output, 20, 100);
+        tableOutput.userToString(g2d);
         // Save the document
         try{
             doc.saveDocument ("doc.pdf");
         }catch (Exception e){
-            
+            e.printStackTrace();
         }
         
         

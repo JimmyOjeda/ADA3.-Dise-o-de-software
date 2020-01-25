@@ -5,6 +5,7 @@
  */
 package CSV;
 
+import com.qoppa.pdfWriter.PDFGraphics;
 import java.util.ArrayList;
 
 /**
@@ -41,6 +42,20 @@ public class TablaDeDatos {
             output = output + "\n";
         }
         return output;
+    }
+    
+    public void userToString(PDFGraphics g2d){
+        String output="";
+        int cont=100;
+        for(int i=0;i<this.matriz.size();i++){
+            output="";
+            ArrayList iArray = this.matriz.get(i);
+            for (int j=0;j<iArray.size();j++){
+                output = output+iArray.get(j)+" | ";
+            }
+            g2d.drawString(output, 20, cont);
+            cont = cont+15;
+        }
     }
 
     @Override
