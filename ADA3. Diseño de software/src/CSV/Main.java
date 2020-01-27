@@ -168,11 +168,13 @@ public class Main {
             g2d.setFont(PDFGraphics.HELVETICA.deriveFont(11));
             g2d.setColor(Color.BLACK);
             
+            
             //Escribe los textos en el pdf
             String output = tableOutput.matrizToCSV();
             tableOutput.userToString(g2d);
             g2d.setColor(Color.BLUE);
             g2d.drawString("Calificaciones", 250, 50);
+            
             
             //Lee la imagen
             BufferedImage image = ImageIO.read(new File("logoUady.png"));
