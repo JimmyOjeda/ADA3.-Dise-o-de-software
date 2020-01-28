@@ -32,10 +32,10 @@ public class VentanaLogin extends javax.swing.JFrame {
         lbNombreDeUsuario = new javax.swing.JLabel();
         txtNombreDeUsuario = new javax.swing.JTextField();
         lbContraseña = new javax.swing.JLabel();
-        txtContraseña = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lbOlvidasteTuContraseña = new javax.swing.JLabel();
+        lbOlvidasteTuUsuario = new javax.swing.JLabel();
+        txtPass = new javax.swing.JPasswordField();
 
         jLabel1.setText("jLabel1");
 
@@ -50,9 +50,9 @@ public class VentanaLogin extends javax.swing.JFrame {
 
         btnIngresar.setText("Ingresar");
 
-        jLabel2.setText("¿Olvidaste tu contraseña?");
+        lbOlvidasteTuContraseña.setText("¿Olvidaste tu contraseña?");
 
-        jLabel3.setText("¿Olvidaste tu usuario?");
+        lbOlvidasteTuUsuario.setText("¿Olvidaste tu usuario?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -65,20 +65,11 @@ public class VentanaLogin extends javax.swing.JFrame {
                         .addComponent(lbLogin)
                         .addGap(0, 62, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbContraseña)
-                            .addComponent(lbNombreDeUsuario))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombreDeUsuario)
-                            .addComponent(txtContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                            .addComponent(lbOlvidasteTuContraseña)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addComponent(lbOlvidasteTuUsuario)
                                 .addGap(8, 8, 8)))
                         .addGap(20, 20, 20)))
                 .addGap(128, 128, 128))
@@ -86,6 +77,16 @@ public class VentanaLogin extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnIngresar)
                 .addGap(171, 171, 171))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbContraseña)
+                    .addComponent(lbNombreDeUsuario))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNombreDeUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                    .addComponent(txtPass))
+                .addGap(128, 128, 128))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,13 +100,13 @@ public class VentanaLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbContraseña)
-                    .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(btnIngresar)
                 .addGap(24, 24, 24)
-                .addComponent(jLabel3)
+                .addComponent(lbOlvidasteTuUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(lbOlvidasteTuContraseña)
                 .addGap(21, 21, 21))
         );
 
@@ -151,12 +152,12 @@ public class VentanaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lbContraseña;
     private javax.swing.JLabel lbLogin;
     private javax.swing.JLabel lbNombreDeUsuario;
-    private javax.swing.JTextField txtContraseña;
+    private javax.swing.JLabel lbOlvidasteTuContraseña;
+    private javax.swing.JLabel lbOlvidasteTuUsuario;
     private javax.swing.JTextField txtNombreDeUsuario;
+    private javax.swing.JPasswordField txtPass;
     // End of variables declaration//GEN-END:variables
 }
