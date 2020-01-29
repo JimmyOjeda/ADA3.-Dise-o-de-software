@@ -38,7 +38,7 @@ public class TablaDeDatos {
             for (int j=0;j<iArray.size();j++){      //se recorren las matrices de adentro
                 output = output+iArray.get(j)+",";  //se separan los elementos por ","
             }
-            output = output.substring(0, output.length()-1);    //??
+            output = output.substring(0, output.length()-1);    //Quita el ultimo elemento de la string
             output = output + "\n";     
         }
         return output;

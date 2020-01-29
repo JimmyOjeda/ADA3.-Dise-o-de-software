@@ -5,12 +5,17 @@
  */
 package Vista;
 
+import Controlador.Controlador;
+import java.util.ArrayList;
+
 /**
  *
  * @author plupy
  */
 public class VentanaCapturaCalificaciones extends javax.swing.JFrame {
-
+    
+    private Controlador controlador;
+    private ArrayList<ArrayList<String>> calificaciones;
     /**
      * Creates new form VentanaPrincipal
      */
@@ -32,6 +37,11 @@ public class VentanaCapturaCalificaciones extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Captura de calificaciones");
@@ -76,6 +86,18 @@ public class VentanaCapturaCalificaciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        //Setea la matriz en la tabla
+    }//GEN-LAST:event_formWindowOpened
+
+    public void setControlador(Controlador controlador) {
+        this.controlador = controlador;
+    }
+
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */

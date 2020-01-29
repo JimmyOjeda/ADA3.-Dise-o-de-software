@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CSV;
+package Controlador;
 
-import Controlador.Controlador;
+import CSV.TablaDeDatos;
 import Vista.VentanaCapturaCalificaciones;
 import Vista.VentanaLogin;
 import Vista.VentanaPrincipal;
@@ -28,81 +28,67 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author Jimmy y Daniel
- * 
-    //Crear el algoritmo de encritamiento 30min
-    //Crear algoritmo para comparar contraseña encriptada y adaptar al main 40min
-    //Modularizar el main 20min
+ * @author jimmy
  */
-public class Main {
+public class Controlador {
+    VentanaCapturaCalificaciones capturaCalificaciones;
+    VentanaLogin login;
+    VentanaPrincipal principal;
+    TablaDeDatos datos;
+    TablaDeDatos datosOutput;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        TablaDeDatos datosAlumnos = new TablaDeDatos(new ArrayList<ArrayList<String>>());
-        TablaDeDatos tableOutput = new TablaDeDatos(new ArrayList<ArrayList<String>>());
+    public Controlador(VentanaCapturaCalificaciones capturaCalificaciones, VentanaLogin login, VentanaPrincipal principal) {
+        this.capturaCalificaciones = capturaCalificaciones;
+        this.login = login;
+        this.principal = principal;
         
-        //Inicializo las ventanas
-        VentanaCapturaCalificaciones capturaCalificaciones = new VentanaCapturaCalificaciones();
-        VentanaLogin login = new VentanaLogin();
-        VentanaPrincipal principal = new VentanaPrincipal();
-        
-        //Inicializo el controlador
-        Controlador controlador = new Controlador(capturaCalificaciones,login,principal);
-        controlador.setDatos(datosAlumnos);
-        controlador.setDatosOutput(tableOutput);
-        
-        //Se muestra el login
-        controlador.getLogin().setPrincipal(controlador.getPrincipal());
-        controlador.getLogin().setVisible(true);
-        
-        //Se lee el CSV con los datos y se les escribe "S/C" como calificación
-        controlador.readCSV(controlador.getDatos().getMatriz(),"ListaAlumnos.csv");
-        controlador.writeGrade(controlador.getDatos());
-        
-        
-        //VIEJO CODIGO
-        /*
-        login();
-        
-        readCSV(data,"ListaAlumnos.csv");
-        
-        writeGrade(datosAlumnos);
-        
-        setTable(datosAlumnos,tableOutput);
-        
-        writeCSV(tableOutput);
-        
-        writePDF(tableOutput);
-        */
-       
+        this.capturaCalificaciones.setControlador(this);
+        this.login.setControlador(this);
+        this.principal.setControlador(this);
+    }
+
+    public void setCapturaCalificaciones(VentanaCapturaCalificaciones capturaCalificaciones) {
+        this.capturaCalificaciones = capturaCalificaciones;
+    }
+
+    public void setLogin(VentanaLogin login) {
+        this.login = login;
+    }
+
+    public void setPrincipal(VentanaPrincipal principal) {
+        this.principal = principal;
+    }
+
+    public void setDatos(TablaDeDatos datos) {
+        this.datos = datos;
+    }
+
+    public void setDatosOutput(TablaDeDatos datosOutput) {
+        this.datosOutput = datosOutput;
     }
     
-    /*private static void login(){
-        Scanner entradaStr = new Scanner(System.in);
-        ArrayList<ArrayList<String>> datosUsers = new ArrayList<ArrayList<String>>();
-        readCSV(datosUsers,"usuarios.csv");
-        
-        System.out.println("Ingresa tu usuario");
-        String firstUser="";
-        firstUser=entradaStr.nextLine();
-        System.out.println("Ingresa la contraseña");
-        String firstPassword="";
-        firstPassword=entradaStr.nextLine();
-        Login login = new Login(firstUser,firstPassword,datosUsers);
-        
-        while (login.comparePass()==false){
-            System.out.println("\n\nUsuario o contraseña incorrecta, intenta de nuevo:");
-            System.out.println("Usuario:");
-            login.setUser(entradaStr.nextLine());
-            System.out.println("Contraseña:");
-            login.setPassword(entradaStr.nextLine());
-        }
-        System.out.println("\n\nBienvenido "+login.getUser());
+
+    public VentanaCapturaCalificaciones getCapturaCalificaciones() {
+        return capturaCalificaciones;
+    }
+
+    public VentanaLogin getLogin() {
+        return login;
+    }
+
+    public VentanaPrincipal getPrincipal() {
+        return principal;
+    }
+
+    public TablaDeDatos getDatos() {
+        return datos;
+    }
+
+    public TablaDeDatos getDatosOutput() {
+        return datosOutput;
     }
     
-    private static void readCSV(ArrayList<ArrayList<String>> data, String route){
+    public void readCSV(ArrayList<ArrayList<String>> data, String route){
         try{
             BufferedReader br =new BufferedReader(new FileReader(route));
             String line = br.readLine();
@@ -120,21 +106,21 @@ public class Main {
         }
     }
     
-    private static void writeGrade(TablaDeDatos datosAlumnos){
+    public void writeGrade(TablaDeDatos datosAlumnos){
         Scanner entradaStr = new Scanner(System.in);
         String grade="";
         datosAlumnos.agregarDato(0, "CALIFICACION");
         for (int i=1;i<datosAlumnos.getMatriz().size();i++){
-            System.out.println("Ingresa la calificacion para " + datosAlumnos.getMatriz().get(i).get(2) +" "+ datosAlumnos.getMatriz().get(i).get(4));
-            grade = entradaStr.nextLine();
+            grade = "S/Cm";
+            /*grade = entradaStr.nextLine();
             if (grade.isEmpty() || grade == " "){
                 grade = "S/C";
-            }
-            datosAlumnos.agregarDato(i,grade);
+            }*/
+            datosAlumnos.agregarDato(i,/*"50"*/grade);
         }
     }
     
-    private static void setTable(TablaDeDatos datosAlumnos,TablaDeDatos tableOutput){
+    public void setTableOutput(TablaDeDatos datosAlumnos,TablaDeDatos tableOutput){
         for(int i = 1; i< datosAlumnos.getMatriz().size(); i++){
             ArrayList alumno = new ArrayList();
             alumno.add(datosAlumnos.getMatriz().get(i).get(0)+"");
@@ -144,7 +130,7 @@ public class Main {
         }
     }
     
-    private static void writeCSV(TablaDeDatos tableOutput){
+    public void writeCSV(TablaDeDatos tableOutput){
         String output = tableOutput.matrizToCSV();
         FileWriter file = null;
         PrintWriter pw = null;
@@ -167,7 +153,7 @@ public class Main {
         }
     }
     
-    private static void writePDF(TablaDeDatos tableOutput){
+    public void writePDF(TablaDeDatos tableOutput){
         try{
             PDFDocument doc = new PDFDocument();
             // create a PageFormat of standard letter size 
@@ -209,6 +195,6 @@ public class Main {
         }catch (Exception e){
             e.printStackTrace();
         }
-    }*/
+    }
     
 }

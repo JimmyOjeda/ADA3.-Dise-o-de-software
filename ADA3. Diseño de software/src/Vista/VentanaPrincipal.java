@@ -5,12 +5,19 @@
  */
 package Vista;
 
+import Controlador.Controlador;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  *
  * @author plupy
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
+    private Controlador controlador;
     /**
      * Creates new form VentanaPrincipal
      */
@@ -29,35 +36,81 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         lbMenu = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnCalificaciones = new javax.swing.JButton();
+        btnImprimirCSV = new javax.swing.JButton();
+        btnImprimirPDF = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        lbAnswer = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         lbMenu.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbMenu.setText("Menú");
 
         jLabel1.setText("¿Qué desea hacer?");
 
-        jButton1.setText("Modificar calificaciones");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCalificaciones.setText("Modificar calificaciones");
+        btnCalificaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCalificacionesActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Imprimir CSV");
+        btnImprimirCSV.setText("Imprimir CSV");
+        btnImprimirCSV.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btnImprimirCSVFocusLost(evt);
+            }
+        });
+        btnImprimirCSV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirCSVActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Imprimir PDF");
+        btnImprimirPDF.setText("Imprimir PDF");
+        btnImprimirPDF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btnImprimirPDFFocusLost(evt);
+            }
+        });
+        btnImprimirPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirPDFActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Cerrar");
+        btnSalir.setText("Cerrar");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnCalificaciones)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnImprimirCSV)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnImprimirPDF)
+                        .addGap(0, 11, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lbAnswer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSalir)))
+                .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -67,20 +120,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(136, 136, 136)
                         .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addGap(0, 11, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
-                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,21 +130,75 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(btnImprimirCSV)
+                    .addComponent(btnCalificaciones)
+                    .addComponent(btnImprimirPDF))
                 .addGap(44, 44, 44)
-                .addComponent(jButton4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalir)
+                    .addComponent(lbAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnCalificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalificacionesActionPerformed
+        controlador.getCapturaCalificaciones().setVisible(true);
+    }//GEN-LAST:event_btnCalificacionesActionPerformed
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.dispose();
+        System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        //readCSV();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnImprimirCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirCSVActionPerformed
+        controlador.setTableOutput(controlador.getDatos(), controlador.getDatosOutput());
+        controlador.writeCSV(controlador.getDatosOutput());
+        this.lbAnswer.setText("Se generó el CSV exitosamente");
+    }//GEN-LAST:event_btnImprimirCSVActionPerformed
+
+    private void btnImprimirPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirPDFActionPerformed
+        controlador.setTableOutput(controlador.getDatos(), controlador.getDatosOutput());
+        controlador.writePDF(controlador.getDatosOutput());
+        this.lbAnswer.setText("Se generó el PDF exitosamente");
+    }//GEN-LAST:event_btnImprimirPDFActionPerformed
+
+    private void btnImprimirPDFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnImprimirPDFFocusLost
+        this.lbAnswer.setText(" ");
+    }//GEN-LAST:event_btnImprimirPDFFocusLost
+
+    private void btnImprimirCSVFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnImprimirCSVFocusLost
+        this.lbAnswer.setText(" ");
+    }//GEN-LAST:event_btnImprimirCSVFocusLost
+
+    private void readCSV(ArrayList<ArrayList<String>> data, String route){
+        try{
+            BufferedReader br =new BufferedReader(new FileReader(route));
+            String line = br.readLine();
+            while (line != null){
+                String[] dataLine = line.split(",");
+                ArrayList<String> tempData = new ArrayList<String>();
+                for (String dato : dataLine){
+                    tempData.add(dato);
+                }
+                data.add(tempData);
+                line = br.readLine();
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void setControlador(Controlador controlador) {
+        this.controlador = controlador;
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -142,11 +235,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnCalificaciones;
+    private javax.swing.JButton btnImprimirCSV;
+    private javax.swing.JButton btnImprimirPDF;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lbAnswer;
     private javax.swing.JLabel lbMenu;
     // End of variables declaration//GEN-END:variables
 }
