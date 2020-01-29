@@ -54,7 +54,6 @@ public class Main {
         controlador.setDatosOutput(tableOutput);
         
         //Se muestra el login
-        controlador.getLogin().setPrincipal(controlador.getPrincipal());
         controlador.getLogin().setVisible(true);
         
         //Se lee el CSV con los datos y se les escribe "S/C" como calificación

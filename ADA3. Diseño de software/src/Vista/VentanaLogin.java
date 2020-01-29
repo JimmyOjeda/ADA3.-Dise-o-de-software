@@ -19,17 +19,12 @@ import java.util.Scanner;
  */
 public class VentanaLogin extends javax.swing.JFrame {
     private Controlador controlador;
-    private VentanaPrincipal principal;
 
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaLogin() {
         initComponents();
-    }
-    
-    public void setPrincipal(VentanaPrincipal principal){
-        this.principal = principal;
     }
 
     /**
@@ -147,7 +142,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         //Si se identifica al usuario, se cierra la ventana login y se despliega la principal
         if (login()==true){
-            this.principal.setVisible(true);
+            controlador.getPrincipal().setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_btnIngresarActionPerformed

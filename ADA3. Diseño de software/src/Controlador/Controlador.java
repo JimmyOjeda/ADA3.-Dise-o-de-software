@@ -111,7 +111,7 @@ public class Controlador {
         String grade="";
         datosAlumnos.agregarDato(0, "CALIFICACION");
         for (int i=1;i<datosAlumnos.getMatriz().size();i++){
-            grade = "S/Cm";
+            grade = "S/C";
             /*grade = entradaStr.nextLine();
             if (grade.isEmpty() || grade == " "){
                 grade = "S/C";

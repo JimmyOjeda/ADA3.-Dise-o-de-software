@@ -43,11 +43,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lbAnswer = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         lbMenu.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbMenu.setText("Menú");
@@ -152,10 +147,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        //readCSV();
-    }//GEN-LAST:event_formWindowOpened
-
     private void btnImprimirCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirCSVActionPerformed
         controlador.setTableOutput(controlador.getDatos(), controlador.getDatosOutput());
         controlador.writeCSV(controlador.getDatosOutput());
@@ -175,24 +166,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btnImprimirCSVFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnImprimirCSVFocusLost
         this.lbAnswer.setText(" ");
     }//GEN-LAST:event_btnImprimirCSVFocusLost
-
-    private void readCSV(ArrayList<ArrayList<String>> data, String route){
-        try{
-            BufferedReader br =new BufferedReader(new FileReader(route));
-            String line = br.readLine();
-            while (line != null){
-                String[] dataLine = line.split(",");
-                ArrayList<String> tempData = new ArrayList<String>();
-                for (String dato : dataLine){
-                    tempData.add(dato);
-                }
-                data.add(tempData);
-                line = br.readLine();
-            }
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
+    
 
     public void setControlador(Controlador controlador) {
         this.controlador = controlador;
