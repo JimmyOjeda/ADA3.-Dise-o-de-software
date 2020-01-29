@@ -5,17 +5,29 @@
  */
 package Vista;
 
+import CSV.Login;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  *
  * @author plupy
  */
 public class VentanaLogin extends javax.swing.JFrame {
+    VentanaPrincipal principal;
 
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaLogin() {
         initComponents();
+    }
+    
+    public void setPrincipal(VentanaPrincipal principal){
+        this.principal = principal;
     }
 
     /**
@@ -36,6 +48,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         lbOlvidasteTuContraseña = new javax.swing.JLabel();
         lbOlvidasteTuUsuario = new javax.swing.JLabel();
         txtPass = new javax.swing.JPasswordField();
+        lbCheck = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -49,6 +62,11 @@ public class VentanaLogin extends javax.swing.JFrame {
         lbContraseña.setText("Contraseña:");
 
         btnIngresar.setText("Ingresar");
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
 
         lbOlvidasteTuContraseña.setText("¿Olvidaste tu contraseña?");
 
@@ -84,8 +102,10 @@ public class VentanaLogin extends javax.swing.JFrame {
                     .addComponent(lbNombreDeUsuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtNombreDeUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                    .addComponent(txtPass))
+                    .addComponent(lbCheck, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtNombreDeUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                        .addComponent(txtPass)))
                 .addGap(128, 128, 128))
         );
         layout.setVerticalGroup(
@@ -101,7 +121,9 @@ public class VentanaLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbContraseña)
                     .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbCheck, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnIngresar)
                 .addGap(24, 24, 24)
                 .addComponent(lbOlvidasteTuUsuario)
@@ -113,6 +135,50 @@ public class VentanaLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        if (login()==true){
+            this.principal.setVisible(true);
+        }
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private boolean login(){
+        boolean access=false;
+        Scanner entradaStr = new Scanner(System.in);
+        ArrayList<ArrayList<String>> datosUsers = new ArrayList<ArrayList<String>>();
+        readCSV(datosUsers,"usuarios.csv");
+        
+        String firstUser="";
+        firstUser=this.txtNombreDeUsuario.getText();
+        String firstPassword="";
+        firstPassword=this.txtPass.getText();
+        Login login = new Login(firstUser,firstPassword,datosUsers);
+        
+        if (login.comparePass()==true){
+            access=true;
+        }else {
+            this.lbCheck.setText("Usuario o contraseña incorrecta");
+        }
+        return access;
+    }
+    
+    private void readCSV(ArrayList<ArrayList<String>> data, String route){
+        try{
+            BufferedReader br =new BufferedReader(new FileReader(route));
+            String line = br.readLine();
+            while (line != null){
+                String[] dataLine = line.split(",");
+                ArrayList<String> tempData = new ArrayList<String>();
+                for (String dato : dataLine){
+                    tempData.add(dato);
+                }
+                data.add(tempData);
+                line = br.readLine();
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -152,6 +218,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lbCheck;
     private javax.swing.JLabel lbContraseña;
     private javax.swing.JLabel lbLogin;
     private javax.swing.JLabel lbNombreDeUsuario;

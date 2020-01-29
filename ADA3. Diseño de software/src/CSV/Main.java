@@ -5,6 +5,8 @@
  */
 package CSV;
 
+import Vista.VentanaLogin;
+import Vista.VentanaPrincipal;
 import com.qoppa.pdfWriter.PDFDocument;
 import com.qoppa.pdfWriter.PDFGraphics;
 import com.qoppa.pdfWriter.PDFPage;
@@ -42,9 +44,13 @@ public class Main {
         ArrayList<ArrayList<String>> dataOutput = new ArrayList<ArrayList<String>>();
         TablaDeDatos tableOutput = new TablaDeDatos(dataOutput);
         
-        login();
+        //login();
+        VentanaPrincipal principal = new VentanaPrincipal();
+        VentanaLogin login = new VentanaLogin();
+        login.setPrincipal(principal);
+        login.setVisible(true);
         
-        readCSV(data,"ListaAlumnos.csv");
+        /*readCSV(data,"ListaAlumnos.csv");
         
         writeGrade(datosAlumnos);
         
@@ -52,7 +58,7 @@ public class Main {
         
         writeCSV(tableOutput);
         
-        writePDF(tableOutput);
+        writePDF(tableOutput);*/
        
     }
     
