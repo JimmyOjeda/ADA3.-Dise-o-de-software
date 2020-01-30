@@ -24,13 +24,7 @@ public class TablaCalificaciones {
         
         //Relleno de datos
         for(int i=1; i < controlador.getDatosOutput().getMatriz().size(); i++){     //recorremos la matriz grande
-            datos.get(i-1) = controlador.getDatosOutput().getMatriz().get(i);
-            
-            ArrayList arrayDentro = controlador.getDatosOutput().getMatriz().get(i);    
-            for(int j=0; j < arrayDentro.size(); j++){                              //recorremos las matrices pequeñas
-                flecha.add(arrayDentro.get(j));     //obtiene el nombre completo del alumno, nombre de la materia y claificacion
-            }
-            datos.add(flecha);
+            datos.add(controlador.getDatosOutput().getMatriz().get(i));
         }
         
         DefaultTableModel tablitaDeCalificaciones = new DefaultTableModel(datos, titulos);
