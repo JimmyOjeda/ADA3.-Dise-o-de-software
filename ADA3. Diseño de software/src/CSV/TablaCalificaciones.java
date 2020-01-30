@@ -19,17 +19,13 @@ public class TablaCalificaciones {
     private Controlador controlador;
     
     public void comenzarTabla(JTable tablaCalificaciones){
-        Vector<String> titulos = new Vector<String>();
-        Vector<Vector<Object>> datos = new Vector<Vector<Object>>();
-        
-        //Relleno de títulos
-        titulos.add("Nombre alumno");                                                   
-        titulos.add("Materia");
-        titulos.add("Calificación");
+        ArrayList<String> titulos = controlador.getDatosOutput().getMatriz().get(0);
+        ArrayList<ArrayList<String>> datos = new ArrayList<ArrayList<String>>();
         
         //Relleno de datos
-        for(int i=0; i < controlador.getDatosOutput().getMatriz().size(); i++){     //recorremos la matriz grande
-            Vector<Object> flecha = new Vector<Object>();
+        for(int i=1; i < controlador.getDatosOutput().getMatriz().size(); i++){     //recorremos la matriz grande
+            datos.get(i-1) = controlador.getDatosOutput().getMatriz().get(i);
+            
             ArrayList arrayDentro = controlador.getDatosOutput().getMatriz().get(i);    
             for(int j=0; j < arrayDentro.size(); j++){                              //recorremos las matrices pequeñas
                 flecha.add(arrayDentro.get(j));     //obtiene el nombre completo del alumno, nombre de la materia y claificacion
