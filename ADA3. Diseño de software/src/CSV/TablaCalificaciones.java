@@ -16,19 +16,28 @@ import javax.swing.table.DefaultTableModel;
  * @author plupy
  */
 public class TablaCalificaciones {
-    private Controlador controlador;
     
-    public void comenzarTabla(JTable tablaCalificaciones){
-        ArrayList<String> titulos = controlador.getDatosOutput().getMatriz().get(0);
-        ArrayList<ArrayList<String>> datos = new ArrayList<ArrayList<String>>();
+    public void comenzarTabla(JTable tablaCalificaciones,Controlador controlador){
+        //Inicializo tabla
+        DefaultTableModel tablitaDeCalificaciones= new DefaultTableModel();
+        ArrayList<ArrayList<String>> datosInput = controlador.getDatosOutput().getMatriz();
+        
+        
+        tablitaDeCalificaciones.addColumn("Nombre");
+        tablitaDeCalificaciones.addColumn("Materia");
+        tablitaDeCalificaciones.addColumn("Calificación");
+        
+        Object[] fila= new Object[datosInput.get(0).size()];
         
         //Relleno de datos
-        for(int i=1; i < controlador.getDatosOutput().getMatriz().size(); i++){     //recorremos la matriz grande
-            datos.add(controlador.getDatosOutput().getMatriz().get(i));
+        for(int i=0; i < datosInput.size(); i++){     //recorremos la matriz grande
+            for (int j=0;j<datosInput.get(0).size();j++){
+                fila[j] = datosInput.get(i).get(j);
+            }
+            tablitaDeCalificaciones.addRow(fila);
         }
         
-        DefaultTableModel tablitaDeCalificaciones = new DefaultTableModel(datos, titulos);
+        //Setea el modelo de tabla
         tablaCalificaciones.setModel(tablitaDeCalificaciones);
-        
     }
 }
