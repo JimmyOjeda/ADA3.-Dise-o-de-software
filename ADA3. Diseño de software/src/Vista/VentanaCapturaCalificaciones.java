@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import CSV.TablaCalificaciones;
 import Controlador.Controlador;
 import java.util.ArrayList;
 
@@ -12,16 +13,25 @@ import java.util.ArrayList;
  *
  * @author plupy
  */
-public class VentanaCapturaCalificaciones extends javax.swing.JFrame {
-    
+public final class VentanaCapturaCalificaciones extends javax.swing.JFrame {
+    TablaCalificaciones tablita = new TablaCalificaciones();
     private Controlador controlador;
     private ArrayList<ArrayList<String>> calificaciones;
+    
+    
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaCapturaCalificaciones() {
         initComponents();
+        //iniciarTablita();
     }
+    
+    public void iniciarTablita(){
+        tablita.comenzarTabla(tbCalificaciones);
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,19 +44,14 @@ public class VentanaCapturaCalificaciones extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbCalificaciones = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Captura de calificaciones");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbCalificaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -57,7 +62,7 @@ public class VentanaCapturaCalificaciones extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbCalificaciones);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,15 +91,9 @@ public class VentanaCapturaCalificaciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        //Setea la matriz en la tabla
-    }//GEN-LAST:event_formWindowOpened
-
     public void setControlador(Controlador controlador) {
         this.controlador = controlador;
     }
-
-    
     
     
     
@@ -137,6 +136,6 @@ public class VentanaCapturaCalificaciones extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbCalificaciones;
     // End of variables declaration//GEN-END:variables
 }
