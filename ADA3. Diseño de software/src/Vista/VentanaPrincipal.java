@@ -43,6 +43,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lbAnswer = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         lbMenu.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbMenu.setText("Menú");
@@ -139,7 +144,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCalificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalificacionesActionPerformed
-        controlador.setTableOutput(controlador.getDatos(), controlador.getDatosOutput());
         controlador.getCapturaCalificaciones().setVisible(true);
     }//GEN-LAST:event_btnCalificacionesActionPerformed
 
@@ -149,13 +153,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnImprimirCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirCSVActionPerformed
-        controlador.setTableOutput(controlador.getDatos(), controlador.getDatosOutput());
         controlador.writeCSV(controlador.getDatosOutput());
         this.lbAnswer.setText("Se generó el CSV exitosamente");
     }//GEN-LAST:event_btnImprimirCSVActionPerformed
 
     private void btnImprimirPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirPDFActionPerformed
-        controlador.setTableOutput(controlador.getDatos(), controlador.getDatosOutput());
         controlador.writePDF(controlador.getDatosOutput());
         this.lbAnswer.setText("Se generó el PDF exitosamente");
     }//GEN-LAST:event_btnImprimirPDFActionPerformed
@@ -167,6 +169,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btnImprimirCSVFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnImprimirCSVFocusLost
         this.lbAnswer.setText(" ");
     }//GEN-LAST:event_btnImprimirCSVFocusLost
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.controlador.setTableOutput(controlador.getDatos(), controlador.getDatosOutput());
+    }//GEN-LAST:event_formWindowOpened
     
 
     public void setControlador(Controlador controlador) {

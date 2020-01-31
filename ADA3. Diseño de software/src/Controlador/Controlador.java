@@ -109,7 +109,7 @@ public class Controlador {
     public void writeGrade(TablaDeDatos datosAlumnos){
         Scanner entradaStr = new Scanner(System.in);
         String grade="";
-        datosAlumnos.agregarDato(0, "CALIFICACION");
+        datosAlumnos.agregarDato(0, "Calificación");
         for (int i=1;i<datosAlumnos.getMatriz().size();i++){
             grade = "S/C";
             /*grade = entradaStr.nextLine();
@@ -120,14 +120,16 @@ public class Controlador {
         }
     }
     
-    public void setTableOutput(TablaDeDatos datosAlumnos,TablaDeDatos tableOutput){
-        for(int i = 1; i< datosAlumnos.getMatriz().size(); i++){
+    public void setTableOutput(TablaDeDatos datosAlumnos, TablaDeDatos tableOutput){
+        
+        for(int i = 0; i < datosAlumnos.getMatriz().size(); i++){
             ArrayList alumno = new ArrayList();
             alumno.add(datosAlumnos.getMatriz().get(i).get(0)+"");
             alumno.add("Diseño de software");
             alumno.add(datosAlumnos.getMatriz().get(i).get(5)+"");
             tableOutput.getMatriz().add(alumno);
         }
+        
     }
     
     public void writeCSV(TablaDeDatos tableOutput){

@@ -23,9 +23,9 @@ public class TablaCalificaciones {
         ArrayList<ArrayList<String>> datosInput = controlador.getDatosOutput().getMatriz();
         
         
-        tablitaDeCalificaciones.addColumn("Nombre");
-        tablitaDeCalificaciones.addColumn("Materia");
-        tablitaDeCalificaciones.addColumn("Calificación");
+        tablitaDeCalificaciones.addColumn(datosInput.get(0).get(0));
+        tablitaDeCalificaciones.addColumn(datosInput.get(0).get(1));
+        tablitaDeCalificaciones.addColumn(datosInput.get(0).get(2));
         
         Object[] fila= new Object[datosInput.get(0).size()];
         
