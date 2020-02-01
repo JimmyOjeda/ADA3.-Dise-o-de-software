@@ -112,17 +112,13 @@ public class Controlador {
         datosAlumnos.agregarDato(0, "Calificación");
         for (int i=1;i<datosAlumnos.getMatriz().size();i++){
             grade = "S/C";
-            /*grade = entradaStr.nextLine();
-            if (grade.isEmpty() || grade == " "){
-                grade = "S/C";
-            }*/
-            datosAlumnos.agregarDato(i,/*"50"*/grade);
+            datosAlumnos.agregarDato(i,grade);
         }
     }
     
     public void setTableOutput(TablaDeDatos datosAlumnos, TablaDeDatos tableOutput){
         
-        for(int i = 0; i < datosAlumnos.getMatriz().size(); i++){
+        for(int i = 1; i < datosAlumnos.getMatriz().size(); i++){
             ArrayList alumno = new ArrayList();
             alumno.add(datosAlumnos.getMatriz().get(i).get(0)+"");
             alumno.add("Diseño de software");
@@ -131,6 +127,7 @@ public class Controlador {
         }
         
     }
+    
     
     public void writeCSV(TablaDeDatos tableOutput){
         String output = tableOutput.matrizToCSV();

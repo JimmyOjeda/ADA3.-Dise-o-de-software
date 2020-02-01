@@ -17,6 +17,7 @@ public final class VentanaCapturaCalificaciones extends javax.swing.JFrame {
     TablaCalificaciones tablita = new TablaCalificaciones();
     private Controlador controlador;
     private ArrayList<ArrayList<String>> calificaciones;
+    private VentanaEditarDatos editarDatos;
     
     
     /**
@@ -24,12 +25,19 @@ public final class VentanaCapturaCalificaciones extends javax.swing.JFrame {
      */
     public VentanaCapturaCalificaciones() {
         initComponents();
+        this.editarDatos = new VentanaEditarDatos();
     }
     
     public void iniciarTablita(){
         this.tablita.comenzarTabla(this.tbCalificaciones,this.controlador);
     }
     
+    public void modificarDatosAlumno(String nombre,String asignatura,String calificacion){
+        int seleccionado = this.tbCalificaciones.getSelectedRow();
+        this.controlador.getDatosOutput().getMatriz().get(seleccionado).set(0, nombre);
+        this.controlador.getDatosOutput().getMatriz().get(seleccionado).set(1, asignatura);
+        this.controlador.getDatosOutput().getMatriz().get(seleccionado).set(2, calificacion);
+    }
     
 
     /**
@@ -45,6 +53,7 @@ public final class VentanaCapturaCalificaciones extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbCalificaciones = new javax.swing.JTable();
         btnCerrar = new javax.swing.JButton();
+        btnEditarCalificacion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -76,21 +85,30 @@ public final class VentanaCapturaCalificaciones extends javax.swing.JFrame {
             }
         });
 
+        btnEditarCalificacion.setText("Editar calificación");
+        btnEditarCalificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarCalificacionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCerrar)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(53, 53, 53)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(125, 125, 125)
-                            .addComponent(jLabel1))))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEditarCalificacion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCerrar)))
+                .addContainerGap(53, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(216, 216, 216))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,10 +116,12 @@ public final class VentanaCapturaCalificaciones extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(btnCerrar)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCerrar)
+                    .addComponent(btnEditarCalificacion))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();
@@ -114,6 +134,17 @@ public final class VentanaCapturaCalificaciones extends javax.swing.JFrame {
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void btnEditarCalificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCalificacionActionPerformed
+        this.editarDatos.setControlador(controlador);
+        if(this.tbCalificaciones.getSelectedRow()!=-1){
+            int seleccionado = this.tbCalificaciones.getSelectedRow();
+            String nombre = controlador.getDatosOutput().getMatriz().get(seleccionado).get(0)+"";
+            String asignatura = controlador.getDatosOutput().getMatriz().get(seleccionado).get(1)+"";
+            String calificacion = controlador.getDatosOutput().getMatriz().get(seleccionado).get(2)+"";
+            this.editarDatos.abrirVentana(nombre, asignatura, calificacion);
+        }
+    }//GEN-LAST:event_btnEditarCalificacionActionPerformed
 
     public void setControlador(Controlador controlador) {
         this.controlador = controlador;
@@ -159,6 +190,7 @@ public final class VentanaCapturaCalificaciones extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnEditarCalificacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbCalificaciones;
