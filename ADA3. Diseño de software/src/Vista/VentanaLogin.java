@@ -7,6 +7,7 @@ package Vista;
 
 import CSV.Login;
 import Controlador.Controlador;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -73,6 +74,12 @@ public class VentanaLogin extends javax.swing.JFrame {
         lbOlvidasteTuContraseña.setText("¿Olvidaste tu contraseña?");
 
         lbOlvidasteTuUsuario.setText("¿Olvidaste tu usuario?");
+
+        txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPassKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,6 +157,14 @@ public class VentanaLogin extends javax.swing.JFrame {
     private void btnIngresarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnIngresarFocusLost
         this.lbCheck.setText(" ");
     }//GEN-LAST:event_btnIngresarFocusLost
+
+    private void txtPassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyTyped
+        // TODO add your handling code here:
+        char cTeclaPresionada=evt.getKeyChar();
+        if(cTeclaPresionada==KeyEvent.VK_ENTER){
+            btnIngresar.doClick();
+        }
+    }//GEN-LAST:event_txtPassKeyTyped
 
     private boolean login(){
         boolean access=false;
